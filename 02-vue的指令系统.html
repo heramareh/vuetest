@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .po{
+            color: red;
+        }
+        .active{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        template: `
+            <div>
+                <div v-text="msg"></div>
+                <div v-html="msg2"></div>
+                <div v-if="isShow">哈哈</div>
+                <div v-if='Math.random()>0.5'>大于0.5</div>
+                <div v-else>小于0.5</div>
+                <div v-show="isShow"></div>
+                <ul>
+                    <li v-for="(item, index) in menuLists">
+                        <h5>{{ index }}</h5>
+                        <h4>{{ item.name }}</h4>
+                        <h3>{{ item.age }}</h3>
+                    </li>
+                </ul>
+                <ul>
+                    <li v-for="(value, key) in menuItems">
+                        {{key}} -- {{value}}
+                    </li>
+                </ul>
+                <p class="po" v-bind:class="{active:isRed}">v-bind指令</p>
+                <!--<button v-on:click="isRed=!isRed">点击改变颜色</button>-->
+                <button v-on:click="changeColor">点击改变颜色</button>
+                <input type="text" v-model="msg">
+                <p>{{ msg }}</p>
+            </div>`,
+        data: function () {
+            return {
+                msg: 'v-text指令',
+                msg2: '<h2>v-html指令</h2>',
+                isShow: false,
+                menuLists: [
+                    {"id":1, "name":"张三","age":18},
+                    {"id":1, "name":"李四","age":28},
+                    {"id":1, "name":"王麻子","age":10}],
+                menuItems: {
+                    "name":"王武",
+                    "age":18,
+                    "fav":"跳舞"
+                },
+                isRed:false
+            }
+        },
+        methods: {
+            changeColor(){
+                console.log(this);
+                this.isRed = !this.isRed;
+            }
+        }
+    });
+</script>
+</body>
+</html>

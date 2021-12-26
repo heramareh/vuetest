@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h3>{{ msg }}</h3>
+    <h4>{{ 1==1 }}</h4>
+    <p>{{ 1>2 ? 'Yes':'No'}}</p>
+</div>
+<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        // template: '<div>{{ msg }}</div>',
+        template: '',
+        data: function () {
+            return {
+                msg: 'hello world'
+            }
+        }
+    });
+</script>
+</body>
+</html>

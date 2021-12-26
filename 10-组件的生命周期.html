@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="app">
+    <App></App>
+</div>
+<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+
+    var Test = {
+        template: `
+            <div>
+                <div>{{msg}}</div>
+                <button @click="changeHandler">改变</button>
+            </div>
+        `,
+        data: function () {
+            return {
+                msg: "hello world"
+            }
+        },
+        methods: {
+            changeHandler() {
+                this.msg = this.msg + "哈哈哈";
+            }
+        },
+        beforeCreate() {
+            console.log("beforeCreate,msg:"+this.msg);
+        },
+        created() {
+            console.log("created,msg:"+this.msg);
+        },
+        beforeMount() {
+            console.log(document.getElementById("app"));
+        },
+        mounted() {
+            console.log(document.getElementById("app"));
+        },
+        beforeUpdate() {
+            console.log(document.getElementById("app").innerHTML);
+        },
+        updated() {
+            console.log(document.getElementById("app").innerHTML);
+        },
+        beforeDestroy() {
+            console.log("beforeDestroy");
+        },
+        destroyed() {
+            console.log("destroyed");
+        },
+        activated() {
+            console.log("activated组件被激活了");
+        },
+        deactivated() {
+            console.log("deactivated组件被停用了");
+        }
+    };
+    var App = {
+        template: `
+            <div>
+                <!--<Test v-if="isShow"></Test>-->
+                <keep-alive>
+                    <Test v-if="isShow"></Test>
+                </keep-alive>
+                <button @click="isShow = !isShow">改变生死</button>
+            </div>
+        `,
+        data: function() {
+            return {
+                isShow: true
+            }
+        },
+        components: {
+            Test
+        }
+    };
+    new Vue({
+        el: '#app',
+        components: {
+            App
+        },
+        methods: {
+
+        }
+    });
+</script>
+</body>
+</html>

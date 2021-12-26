@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .vheader{
+            width: 100%;
+            height: 100px;
+            background-color: blanchedalmond;
+        }
+        .content{
+            width: 100%;
+            height: 500px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    var Header = {
+        template: `
+            <div class="vheader">我是header
+            <button @click="changeFontSize">字体变大</button>
+            </div>
+        `,
+        methods: {
+            changeFontSize() {
+                //触发父组件中声明的自定义事件 vue $emit()
+                // 第一个参数：触发自定义事件的名称
+                // 第二个参数：传进去的值
+                this.$emit('change', )
+            },
+        }
+    };
+
+    var Content = {
+        template: `
+            <div class="content">
+                我是content
+                <ul>
+                    <li v-for="(item, index) in posts">
+                        <h3>{{ item.id }}</h3>
+                        <h4>{{ item.name }}</h4>
+                    </li>
+                </ul>
+            </div>
+            `,
+        props: ['posts']
+    };
+
+    var App = {
+        template: `<div v-bind:style='{fontSize:postFontSize+"em"}'>
+        <Header @change="changeHeader"></Header>
+        <Content :posts='posts'></Content>
+        </div>`,
+        components: {
+            Content,
+            Header,
+        },
+        data: function () {
+            return {
+                posts: [
+                    {id:1, name: "aa"},
+                    {id:2, name: "bb"},
+                    {id:3, name: "cc"},
+                ],
+                postFontSize: 1,
+            }
+        },
+        methods: {
+            changeHeader() {
+                this.postFontSize += .1;
+            }
+        }
+    };
+
+    new Vue({
+        el: '#app',
+        template: `<App />`,
+        data(){
+            return {}
+        },
+        components: {
+            App
+        }
+    });
+</script>
+</body>
+</html>

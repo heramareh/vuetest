@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .vheader{
+            width: 100%;
+            height: 100px;
+            background-color: blanchedalmond;
+        }
+        .content{
+            width: 100%;
+            height: 500px;
+            background-color: red;
+        }
+        .default{
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            background: #fff;
+            border: 1px
+            solid #dcdfe6;
+            color: #606266;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            transition: .1s;
+            font-weight: 500;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        .success{
+            color: #fff;
+            background-color: #67c23a;
+            border-color: #67c23a;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    // 全局组件
+    //slot插槽，作为承载分发内容的出口
+    Vue.component('Vbtn', {
+        template: `
+            <button class="default" :class="type"><slot></slot></button>
+        `,
+        props: ['type']
+    });
+
+
+    var Header = {
+        template: `
+            <div class="vheader">我是header
+            <Vbtn @click.native="changeFontSize">字体变大</Vbtn>
+            </div>
+        `,
+        methods: {
+            changeFontSize() {
+                //触发父组件中声明的自定义事件 vue $emit()
+                // 第一个参数：触发自定义事件的名称
+                // 第二个参数：传进去的值
+                this.$emit('change', )
+            },
+        }
+    };
+
+    var Content = {
+        template: `
+            <div class="content">
+                我是content
+                <Vbtn type="success">编辑</Vbtn>
+                <ul>
+                    <li v-for="(item, index) in posts">
+                        <h3>{{ item.id }}</h3>
+                        <h4>{{ item.name }}</h4>
+                    </li>
+                </ul>
+            </div>
+            `,
+        props: ['posts']
+    };
+
+    var App = {
+        template: `<div v-bind:style='{fontSize:postFontSize+"em"}'>
+        <Header @change="changeHeader"></Header>
+        <Content :posts='posts'></Content>
+        </div>`,
+        components: {
+            Content,
+            Header,
+        },
+        data: function () {
+            return {
+                posts: [
+                    {id:1, name: "aa"},
+                    {id:2, name: "bb"},
+                    {id:3, name: "cc"},
+                ],
+                postFontSize: 1,
+            }
+        },
+        methods: {
+            changeHeader() {
+                this.postFontSize += .1;
+            }
+        }
+    };
+
+    new Vue({
+        el: '#app',
+        template: `<App />`,
+        data(){
+            return {}
+        },
+        components: {
+            App
+        }
+    });
+</script>
+</body>
+</html>
