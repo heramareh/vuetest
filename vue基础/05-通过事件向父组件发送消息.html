@@ -14,54 +14,16 @@
             height: 500px;
             background-color: red;
         }
-        .default{
-            display: inline-block;
-            line-height: 1;
-            white-space: nowrap;
-            cursor: pointer;
-            background: #fff;
-            border: 1px
-            solid #dcdfe6;
-            color: #606266;
-            -webkit-appearance: none;
-            text-align: center;
-            box-sizing: border-box;
-            outline: none;
-            margin: 0;
-            transition: .1s;
-            font-weight: 500;
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            padding: 12px 20px;
-            font-size: 14px;
-            border-radius: 4px;
-        }
-        .success{
-            color: #fff;
-            background-color: #67c23a;
-            border-color: #67c23a;
-        }
     </style>
 </head>
 <body>
 <div id="app"></div>
-<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
 <script type="text/javascript">
-    // 全局组件
-    //slot插槽，作为承载分发内容的出口
-    Vue.component('Vbtn', {
-        template: `
-            <button class="default" :class="type"><slot></slot></button>
-        `,
-        props: ['type']
-    });
-
-
     var Header = {
         template: `
             <div class="vheader">我是header
-            <Vbtn @click.native="changeFontSize">字体变大</Vbtn>
+            <button @click="changeFontSize">字体变大</button>
             </div>
         `,
         methods: {
@@ -78,7 +40,6 @@
         template: `
             <div class="content">
                 我是content
-                <Vbtn type="success">编辑</Vbtn>
                 <ul>
                     <li v-for="(item, index) in posts">
                         <h3>{{ item.id }}</h3>

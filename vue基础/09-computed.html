@@ -29,13 +29,13 @@
         </li>
     </ul>
 </div>
-<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
 <script type="text/javascript">
     var musicData = [
-        {id:1, name:"少年", author:"梦然", src:"./static/少年-梦然.mp3"},
-        {id:2, name:"微微", author:"傅如乔", src:"./static/微微-傅如乔.mp3"},
-        {id:3, name:"世界这么大还是遇见你", author:"程响", src:"./static/世界这么大还是遇见你-程响.mp3"},
-        {id:4, name:"桥边姑娘", author:"海伦", src:"./static/桥边姑娘-海伦.mp3"},
+        {id:1, name:"少年", author:"梦然", src:"../static/少年-梦然.mp3"},
+        {id:2, name:"微微", author:"傅如乔", src:"../static/微微-傅如乔.mp3"},
+        {id:3, name:"世界这么大还是遇见你", author:"程响", src:"../static/世界这么大还是遇见你-程响.mp3"},
+        {id:4, name:"桥边姑娘", author:"海伦", src:"../static/桥边姑娘-海伦.mp3"},
     ];
     new Vue({
         el:'#app',
@@ -46,19 +46,13 @@
             }
         },
         computed: {
-            getCurrentSongSrc: {
-                get: function () {
-                    return this.musicData[this.currentIndex].src;
-                },
-                set: function (newV) {
-                    this.currentIndex = newV;
-                }
+            getCurrentSongSrc: function() {
+                return this.musicData[this.currentIndex].src;
             }
         },
         methods: {
             clickHandler(index){
-                // this.currentIndex = index;
-                this.getCurrentSongSrc = index;
+                this.currentIndex = index;
             }
         }
     });

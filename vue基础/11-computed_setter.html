@@ -29,7 +29,7 @@
         </li>
     </ul>
 </div>
-<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
 <script type="text/javascript">
     var musicData = [
         {id:1, name:"少年", author:"梦然", src:"./static/少年-梦然.mp3"},
@@ -46,13 +46,19 @@
             }
         },
         computed: {
-            getCurrentSongSrc: function() {
-                return this.musicData[this.currentIndex].src;
+            getCurrentSongSrc: {
+                get: function () {
+                    return this.musicData[this.currentIndex].src;
+                },
+                set: function (newV) {
+                    this.currentIndex = newV;
+                }
             }
         },
         methods: {
             clickHandler(index){
-                this.currentIndex = index;
+                // this.currentIndex = index;
+                this.getCurrentSongSrc = index;
             }
         }
     });

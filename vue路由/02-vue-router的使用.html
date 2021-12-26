@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="../node_modules/vue/dist/vue.min.js"></script>
+<!--1.引包，引入核心插件vue-router-->
+<script type="text/javascript" src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script type="text/javascript">
+    // 2.让vue使用该VueRouter创建
+    Vue.use(VueRouter);
+
+    var Login = {
+        template: `<div>我是登录页面</div>`
+    };
+    var Register = {
+        template: `<div>我是注册页面</div>`
+    };
+    // 3.创建路由对象
+    var router = new VueRouter({
+        // 4.配置路由对象
+        routes: [
+            //路由匹配的规则
+            {
+                path: '/login',
+                name: 'login',
+                component: Login
+            },
+            {
+                path: '/register',
+                name: 'register',
+                component: Register
+            },
+        ]
+    });
+
+    // 抛出两个全局的组件 router-link router-view(路由组件的出口)
+
+    var App = {
+        template: `
+            <div>
+                <!--<router-link to="/login">登录</router-link>-->
+                <!--<router-link to="/register">注册</router-link>-->
+                <router-link :to="{name:'login'}">登录</router-link>
+                <router-link :to="{name:'register'}">注册</router-link>
+                <router-view></router-view>
+            </div>
+        `
+    };
+
+    // Cannot read properties of undefined (reading 'matched')
+    new Vue({
+        el: '#app',
+        // 5.将配置好的路由对象关联到vue实例化对象中
+        router: router,
+        template: `
+            <App />
+        `,
+        components: {
+            App
+        }
+    });
+</script>
+</body>
+</html>
