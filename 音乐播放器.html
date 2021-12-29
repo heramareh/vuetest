@@ -33,10 +33,12 @@
     //     {id:4, name:"桥边姑娘", author:"海伦", src:"./static/桥边姑娘-海伦.mp3"},
     // ];
 
+
     var App = {
         template: `
             <div>
-                <audio :src="getCurrentSongSrc" autoplay controls></audio>
+                <audio id="ao" :src="getCurrentSongSrc" autoplay controls @ended="nextMusic()"></audio>
+                <button @click="getlist()">刷新列表</button>
                 <ul>
                     <li v-for="(item, index) in musicData" @click="clickHandler(index)" :class="{active:currentIndex===index}">
                         <h3>{{item.id}}-{{item.name}}</h3>
@@ -61,8 +63,15 @@
             clickHandler(index){
                 this.currentIndex = index;
             },
+            nextMusic() {
+                this.currentIndex = this.currentIndex + 1;
+                if (this.currentIndex === this.musicData.length) {
+                    this.currentIndex = 0;
+                }
+            },
             getlist(){
-                this.$http.get('http://127.0.0.1:8080/api/musiclist', {params:{"path":"E:\\FrontendProject\\vuetest\\static", "dir":"./static/"}}).then(
+                //this.$http.get('http://127.0.0.1:8080/api/musiclist', {params:{"path":"E:\\FrontendProject\\vuetest\\static", "dir":"./static/"}}).then(
+                this.$http.get('http://127.0.0.1:8080/api/musiclist').then(
                     response => {
                         // console.log(JSON.stringify(response.body.data));
                         this.musicData = response.body.data;
