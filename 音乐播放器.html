@@ -13,9 +13,57 @@
         }
         ul li {
             margin: 20px 20px;
+            cursor: pointer;
         }
         .active{
             background-color: cornflowerblue;
+        }
+        audio {
+            margin: 20px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #409eff;
+        }
+        input {
+            margin-left: 20px;
+            -webkit-appearance: none;
+            background-color: #fff;
+            background-image: none;
+            border-radius: 4px;
+            border: 1px solid #dcdfe6;
+            box-sizing: border-box;
+            color: #606266;
+            display: inline-block;
+            font-size: inherit;
+            height: 40px;
+            line-height: 40px;
+            outline: none;
+            padding: 0 15px;
+            transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+            width: 230px;
+        }
+        button {
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            color: #fff;
+            background-color: #409eff;
+            border: 1px solid #409eff;
+            -webkit-appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            transition: .1s;
+            font-weight: 500;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -25,6 +73,8 @@
 <script type="text/javascript" src="./node_modules/vue/dist/vue.min.js"></script>
 <script type="text/javascript" src="./node_modules/vue-resource/dist/vue-resource.min.js"></script>
 <script type="text/javascript">
+    var url = "http://123.56.193.206:8888";
+    // var url = "http://127.0.0.1:8888";
     Vue.use(VueResource);
     // var musicData = [
     //     {id:1, name:"少年", author:"梦然", src:"./static/少年-梦然.mp3"},
@@ -38,7 +88,9 @@
         template: `
             <div>
                 <audio id="ao" :src="getCurrentSongSrc" autoplay controls @ended="nextMusic()"></audio>
-                <button @click="getlist()">刷新列表</button>
+                <br>
+                <input type="text" v-model="name">
+                <button @click="search()">搜索</button>
                 <ul>
                     <li v-for="(item, index) in musicData" @click="clickHandler(index)" :class="{active:currentIndex===index}">
                         <h3>{{item.id}}-{{item.name}}</h3>
@@ -49,7 +101,8 @@
         data: function () {
             return {
                 musicData: '',
-                currentIndex: 0
+                currentIndex: 0,
+                name: ''
             }
         },
         computed: {
@@ -70,8 +123,7 @@
                 }
             },
             getlist(){
-                //this.$http.get('http://127.0.0.1:8080/api/musiclist', {params:{"path":"E:\\FrontendProject\\vuetest\\static", "dir":"./static/"}}).then(
-                this.$http.get('http://123.56.193.206:8888/api/musiclist').then(
+                this.$http.get(url+'/api/music/list').then(
                     response => {
                         // console.log(JSON.stringify(response.body.data));
                         this.musicData = response.body.data;
@@ -85,9 +137,25 @@
                     }
                 )
             },
+            search(){
+                this.$http.get(url+'/api/music/search', {params:{"name":this.name}}).then(
+                    // this.$http.get('http://123.56.193.206:8888/api/musiclist').then(
+                    response => {
+                        // console.log(JSON.stringify(response.body.data));
+                        this.musicData = response.body.data;
+                        // console.log(this.musicData);
+                        // console.log(typeof this.musicData);
+                        // return JSON.stringify(response.body.data);
+                    }, response => {
+                        this.musicData = [];
+                        // console.log(JSON.stringify(response.body));
+                        // return [];
+                    }
+                )
+            }
         },
         mounted() {
-            this.getlist();
+            this.search();
         }
     };
 
