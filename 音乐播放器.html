@@ -151,6 +151,9 @@
                     response => {
                         // console.log(JSON.stringify(response.body.data));
                         this.musicData = response.body.data;
+                        if (this.musicData) {
+                            this.currentIndex = 0;
+                        }
                         // console.log(this.musicData);
                         // console.log(typeof this.musicData);
                         // return JSON.stringify(response.body.data);
