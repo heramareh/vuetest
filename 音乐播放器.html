@@ -8,18 +8,23 @@
             padding: 0;
             margin: 0;
         }
+        div {
+            width: 50%;
+        }
         ul {
             list-style: none;
         }
         ul li {
             margin: 20px 20px;
             cursor: pointer;
+            font-size: 35px;
         }
         .active{
             background-color: cornflowerblue;
         }
         audio {
             margin: 20px;
+            width: 100%;
         }
         input:focus {
             outline: none;
@@ -41,7 +46,8 @@
             outline: none;
             padding: 0 15px;
             transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-            width: 230px;
+            /*width: 230px;*/
+            width: 70%;
         }
         button {
             display: inline-block;
@@ -64,6 +70,7 @@
             padding: 12px 20px;
             font-size: 14px;
             border-radius: 4px;
+            width: 24%;
         }
     </style>
 </head>
@@ -93,7 +100,7 @@
                 <button @click="search()">搜索</button>
                 <ul>
                     <li v-for="(item, index) in musicData" @click="clickHandler(index)" :class="{active:currentIndex===index}">
-                        <h3>{{item.id}}-{{item.name}}</h3>
+                        {{item.id}}-{{item.name}}
                         <!--<p>{{item.author}}</p>-->
                     </li>
                 </ul>
