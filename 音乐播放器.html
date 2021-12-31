@@ -11,12 +11,17 @@
         div {
             width: 100%;
         }
+        .search-key {
+            width: 90%;
+            /*padding: 20px;*/
+            margin-left: 20px;
+        }
         ul {
-            width: 98%;
+            width: 95%;
             list-style: none;
         }
         ul li {
-            margin: 20px 20px;
+            margin: 20px;
             cursor: pointer;
             font-size: 50px;
         }
@@ -25,7 +30,7 @@
         }
         audio {
             margin: 20px;
-            width: 95%;
+            width: 50%;
             margin-bottom: 80px;
         }
         input:focus {
@@ -33,7 +38,7 @@
             border-color: #409eff;
         }
         input {
-            margin-left: 20px;
+            /*margin-left: 20px;*/
             -webkit-appearance: none;
             background-color: #fff;
             background-image: none;
@@ -46,10 +51,10 @@
             height: 40px;
             line-height: 40px;
             outline: none;
-            padding: 0 15px;
+            /*padding: 0 15px;*/
             transition: border-color .2s cubic-bezier(.645,.045,.355,1);
             /*width: 230px;*/
-            width: 71%;
+            width: 75%;
         }
         button {
             display: inline-block;
@@ -68,10 +73,11 @@
             -moz-user-select: none;
             -webkit-user-select: none;
             -ms-user-select: none;
-            padding: 12px 20px;
+            padding: 12px 0;
             font-size: 14px;
             border-radius: 4px;
-            width: 25%;
+            width: 24%;
+
         }
     </style>
 </head>
@@ -97,8 +103,10 @@
             <div>
                 <audio id="ao" :src="getCurrentSongSrc" autoplay controls @ended="nextMusic()"></audio>
                 <br>
-                <input type="text" v-model="name">
-                <button @click="search()">搜索</button>
+                <div class="search-key">
+                    <input type="text" v-model="name">
+                    <button @click="search()">搜索</button>
+                </div>
                 <ul>
                     <li v-for="(item, index) in musicData" @click="clickHandler(index)" :class="{active:currentIndex===index}">
                         {{item.id}}-{{item.name}}
