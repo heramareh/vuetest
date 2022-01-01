@@ -25,16 +25,16 @@
         ul li {
             margin: 20px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
         }
         .active{
             background-color: cornflowerblue;
         }
         audio {
             margin: 20px;
-            padding-top: 30px;
+            /*padding-top: 30px;*/
             /*width: 50%;*/
-            margin-bottom: 50px;
+            /*margin-bottom: 50px;*/
         }
         input:focus {
             outline: none;
@@ -50,7 +50,7 @@
             box-sizing: border-box;
             color: #606266;
             display: inline-block;
-            font-size: 12px;
+            font-size: 14px;
             height: 40px;
             line-height: 25px;
             outline: none;
@@ -107,8 +107,10 @@
                 <audio id="ao" :src="getCurrentSongSrc" autoplay controls @ended="nextMusic()"></audio>
                 <br>
                 <div class="search-key">
-                    <input type="search" v-model="name" placeholder=" 请输入关键词搜索..." autocomplete="off">
+                <form @action="search()">
+                    <input type="search" v-model="name" placeholder="请输入关键词搜索..." autocomplete="off">
                     <button @click="search()">搜索</button>
+                </form>
                 </div>
                 <ul>
                     <li v-for="(item, index) in musicData" @click="clickHandler(index)" :class="{active:currentIndex===index}">
