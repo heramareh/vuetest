@@ -107,8 +107,8 @@
                 <audio id="ao" :src="getCurrentSongSrc" autoplay controls @ended="nextMusic()"></audio>
                 <br>
                 <div class="search-key">
-                <form @action="search()">
-                    <input type="search" v-model="name" placeholder="请输入关键词搜索..." autocomplete="off">
+                <form @submit.prevent="search" action="">
+                    <input type="search" v-model="name" placeholder="请输入关键词搜索...">
                     <button @click="search()">搜索</button>
                 </form>
                 </div>
