@@ -90,8 +90,8 @@
 <script type="text/javascript" src="./node_modules/vue/dist/vue.min.js"></script>
 <script type="text/javascript" src="./node_modules/vue-resource/dist/vue-resource.min.js"></script>
 <script type="text/javascript">
-    var url = "http://123.56.193.206:8888";
-    // var url = "http://127.0.0.1:8888";
+    // var url = "http://123.56.193.206:8888";
+    var url = "http://127.0.0.1:8888";
     Vue.use(VueResource);
     // var musicData = [
     //     {id:1, name:"少年", author:"梦然", src:"./static/少年-梦然.mp3"},
@@ -138,9 +138,12 @@
                 this.currentIndex = index;
             },
             nextMusic() {
-                this.currentIndex = this.currentIndex + 1;
-                if (this.currentIndex === this.musicData.length) {
+                // console.log(this.currentIndex);
+                // console.log(this.musicData.length);
+                if (this.currentIndex + 1 === this.musicData.length) {
                     this.search();
+                } else{
+                    this.currentIndex = this.currentIndex + 1;
                 }
             },
             getlist(){
