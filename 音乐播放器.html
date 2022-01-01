@@ -21,27 +21,34 @@
         ul {
             width: 95%;
             list-style: none;
+            margin: 20px;
         }
         ul li {
-            margin: 20px;
+            margin: 20px 0;
+            display: block;
             cursor: pointer;
             font-size: 16px;
+            height: 60px;
+            line-height: 92px;
+            text-align: left;
+            overflow:hidden;
+            vert-align: middle;
+        }
+        ul li p {
+            display: inline-block;
+            vertical-align: top;
         }
         .active{
             background-color: cornflowerblue;
         }
         audio {
             margin: 20px;
-            /*padding-top: 30px;*/
-            /*width: 50%;*/
-            /*margin-bottom: 50px;*/
         }
         input:focus {
             outline: none;
             border-color: #409eff;
         }
         input {
-            /*margin-left: 20px;*/
             -webkit-appearance: none;
             background-color: #fff;
             background-image: none;
@@ -54,9 +61,7 @@
             height: 40px;
             line-height: 25px;
             outline: none;
-            /*padding: 0 15px;*/
             transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-            /*width: 230px;*/
             width: 78%;
         }
         button {
@@ -83,8 +88,9 @@
 
         }
         img {
-            width: 54px;
-            height: 54px;
+            display: inline-block;
+            width: auto;
+            height: 100%;
         }
     </style>
 </head>
@@ -120,7 +126,7 @@
                 <ul>
                     <li v-for="(item, index) in musicData" @click="clickHandler(index)" :class="{active:currentIndex===index}">
                         <img :src="getSongImg(index)">
-                        {{item.id}}-{{item.name}}
+                        <p>{{item.id}}-{{item.name}}</p>
                         <!--<p>{{item.author}}</p>-->
                     </li>
                 </ul>
