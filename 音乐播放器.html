@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximu-scale=1.0,user-scalable=no">
     <title></title>
     <style>
         * {
@@ -12,7 +14,7 @@
             width: 100%;
         }
         .search-key {
-            width: 80%;
+            width: 20%;
             /*padding: 20px;*/
             margin-left: 20px;
         }
@@ -30,7 +32,7 @@
         }
         audio {
             margin: 20px;
-            width: 50%;
+            /*width: 50%;*/
             margin-bottom: 80px;
         }
         input:focus {
@@ -47,14 +49,14 @@
             box-sizing: border-box;
             color: #606266;
             display: inline-block;
-            font-size: inherit;
+            font-size: 12px;
             height: 40px;
-            line-height: 40px;
+            line-height: 25px;
             outline: none;
             /*padding: 0 15px;*/
             transition: border-color .2s cubic-bezier(.645,.045,.355,1);
             /*width: 230px;*/
-            width: 85%;
+            width: 80%;
         }
         button {
             display: inline-block;
@@ -104,7 +106,7 @@
                 <audio id="ao" :src="getCurrentSongSrc" autoplay controls @ended="nextMusic()"></audio>
                 <br>
                 <div class="search-key">
-                    <input type="text" v-model="name">
+                    <input type="text" v-model="name" placeholder="请输入关键词搜索..." autocomplete="off">
                     <button @click="search()">搜索</button>
                 </div>
                 <ul>
