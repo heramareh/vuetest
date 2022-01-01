@@ -82,6 +82,10 @@
             width: 20%;
 
         }
+        img {
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
@@ -91,8 +95,8 @@
 <script type="text/javascript" src="./node_modules/vue-resource/dist/vue-resource.min.js"></script>
 <script type="text/javascript">
     // var url = "https://www.xixihahaheihei.cn";
-    var url = "http://123.56.193.206";
-    // var url = "http://127.0.0.1:8888";
+    // var url = "http://123.56.193.206";
+    var url = "http://127.0.0.1:8888";
     Vue.use(VueResource);
     // var musicData = [
     //     {id:1, name:"少年", author:"梦然", src:"./static/少年-梦然.mp3"},
@@ -115,6 +119,7 @@
                 </div>
                 <ul>
                     <li v-for="(item, index) in musicData" @click="clickHandler(index)" :class="{active:currentIndex===index}">
+                        <img :src="getSongImg(index)">
                         {{item.id}}-{{item.name}}
                         <!--<p>{{item.author}}</p>-->
                     </li>
@@ -181,6 +186,13 @@
                         // return [];
                     }
                 )
+            },
+            getSongImg(index) {
+                imgUrl = this.musicData[index].img;
+                if (imgUrl) {
+                    return imgUrl
+                }
+                return "./static/w1.png";
             }
         },
         mounted() {
