@@ -108,7 +108,7 @@
                 <br>
                 <div class="search-key">
                 <form @submit.prevent="search" action="">
-                    <input type="search" v-model="name" placeholder="请输入关键词搜索...">
+                    <input type="search" ref="searchKey" v-model="name" placeholder="请输入关键词搜索...">
                     <button @click="search()">搜索</button>
                 </form>
                 </div>
@@ -159,6 +159,7 @@
                 )
             },
             search(){
+                this.$refs.searchKey.blur();
                 this.$http.get(url+'/api/music/search', {params:{"name":this.name}}).then(
                     // this.$http.get('http://123.56.193.206:8888/api/musiclist').then(
                     response => {
